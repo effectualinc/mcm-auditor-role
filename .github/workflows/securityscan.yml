@@ -1,0 +1,24 @@
+name: CFN-NAG Security Scan
+
+on: [push]
+
+jobs:
+  ## cfn-nag security scan
+  security-scan-nag:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: grolston/cfn-security@master
+      with:
+        cloudformation_directory: "./cloudformation/"
+        scanner: "cfn-nag"
+
+  ## checkov security scan
+  security-scan-checkov:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: grolston/cfn-security@master
+      with:
+        cloudformation_directory: "./cloudformation/"
+        scanner: "checkov"

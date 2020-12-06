@@ -1,0 +1,27 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Effectual MCM Auditor Role for cross-account secure access'
+
+Parameters:
+
+  AccountId:
+    Type: String
+    Description: Effectual's AWS Account ID provided. Contact your Effectual representative if needing the Account ID.
+
+Resources:
+
+  rCloudHealthSupportRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: Effectual-MCM-Auditor
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            "AWS": !Sub arn:aws:iam::${AccountId}:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_Effectual-Auditor_46d5c3152e4e8310
+          Action:
+          - sts:AssumeRole
+      ManagedPolicyArns:
+      - !Sub arn:${AWS::Partition}:iam::aws:policy/AdministratorAccess
+
