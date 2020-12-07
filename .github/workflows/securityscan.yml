@@ -1,4 +1,4 @@
-name: CFN-NAG Security Scan
+name: Effectual Security Scan
 
 on: [push]
 

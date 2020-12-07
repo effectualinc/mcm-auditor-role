@@ -24,3 +24,11 @@ The deployment process leverages AWS CloudFormation and is relatively simple onc
 [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=effectual-mcm-auditor-role&templateURL=https://effectualinc.s3.amazonaws.com/mcm-auditor-role/mcm-auditor-role.yml)
 
 The template requires a single parameter `AccountId`. Your Effectual representative will supply you with the AWS Account ID required. Do not try to launch the stack unless you have this information.
+
+## Removal
+
+Once the audit is complete, your Cloud admin team can go into the account and access the CloudFormation web console in the region where the stack `effectual-mcm-auditor-role` was initially deployed. Simply select the CloudFormation stack name `effectual-mcm-auditor-role` and click delete. All resources provisioned will be securely removed.
+
+## Security
+
+Effectual places security first for all our solutions and services. All our of deployments are developed as code which undergoes multiple security tests prior to release. The test results for all Effectual's public repositories can be found within the [GitHub Actions tab](https://github.com/effectualinc/mcm-auditor-role/actions).
