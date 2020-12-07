@@ -31,4 +31,4 @@ Once the audit is complete, your Cloud admin team can go into the account and ac
 
 ## Security
 
-Effectual places security first for all our solutions and services. All our of deployments are developed as code which undergoes multiple security tests prior to release. The test results for all Effectual's public repositories can be found within the [GitHub Actions tab](https://github.com/effectualinc/mcm-auditor-role/actions).
+Effectual places security first for all our solutions and services. All of our deployments are developed as code, which undergoes multiple security tests prior to release. The test results for all Effectual's public repositories can be found within the [GitHub Actions tab](https://github.com/effectualinc/mcm-auditor-role/actions).
