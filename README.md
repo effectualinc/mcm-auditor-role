@@ -10,6 +10,6 @@ Steps to Deploy
 2. Click this button to launch stack.
 3. Fill out parameters
 
-[![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=effectual-mcm-auditor-role&templateURL=https://effectualinc.s3.amazonaws.com/mcm-auditor-role/mcm-auditor-role.yml)
+[![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=effectual-mcm-auditor-role&templateURL=https://effectualinc.s3.amazonaws.com/mcm-auditor-role/mcm-auditor-role.yml){:target="_blank" rel="noopener"}
 
 > **Note:** The template requires a single parameter `AccountId`. Your Effectual representative will supply you with the AWS Account ID required.
