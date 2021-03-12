@@ -1,6 +1,13 @@
 # Effectual MCM Auditor
 
-Template to deploy a cross-account role that enables secure access for Effectual MCM Cloud Audit. The template will allow you to choose different permissions sets based on AWS's managed policies.
+Template to deploy a cross-account role that enables secure access for Effectual MCM Cloud Audit. The template will allow you to choose different permissions sets based on AWS's managed policies. The following permissions are supported:
+
+* Full Admin Access
+* Read Only Access
+* Well Architected ConsoleR ead Only Access
+* Well Architected Console Full Access
+* SecurityAudit
+* AWS Billing ReadOnly Access
 
 ## Prerequisites
 
