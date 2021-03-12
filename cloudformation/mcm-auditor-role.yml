@@ -44,6 +44,9 @@ Parameters:
   pAccountId:
     Type: String
     Description: "Effectual's AWS Account ID provided. Contact your Effectual representative if needing the Account ID."
+    Default: "678719429636"
+    MinLength: 12
+    MaxLength: 12
 
   pIsFullAdmin:
     Type: String
@@ -104,7 +107,7 @@ Conditions:
 
 Resources:
 
-  rCloudHealthSupportRole:
+  rEffectualAuditRole:
     Type: AWS::IAM::Role
     Properties:
       RoleName: Effectual-MCM-Auditor
