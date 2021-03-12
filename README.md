@@ -17,7 +17,7 @@ The deployment process leverages AWS CloudFormation and is relatively simple onc
 
 1. Open your web browser and login to your AWS Account.
 2. Click the `Launch Stack` button below to launch stack.
-3. Fill in the parameter value for AWS Account ID (`AccountId`)
+3. Fill in the parameter values
 
 > **Note:** If you want to open the link as a new tab use `ctrl+click` when clicking the *launch Stack* button below.
 

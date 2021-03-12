@@ -2,11 +2,105 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'Effectual MCM Auditor Role for cross-account secure access'
 
+Metadata:
+  VersionDate:
+    Value: 20210312
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+    - Label:
+        default: Account
+      Parameters:
+      - pAccountId
+    - Label:
+        default: Permissions
+      Parameters:
+      - pIsReadOnlyAccess
+      - pIsFullAdmin
+      - pIsWellArchitectedConsoleReadOnlyAccess
+      - pIsWellArchitectedConsoleFullAccess
+      - pIsSecurityAudit
+      - pIsAWSBillingReadOnlyAccess
+    - Label:
+        default: ECS Cluster Configs
+    ParameterLabels:
+      pAccountId:
+        default: Account ID
+      pIsReadOnlyAccess:
+        default: Read Only Access
+      pIsFullAdmin:
+        default: Full Admin
+      pIsWellArchitectedConsoleReadOnlyAccess:
+        default: Well Architected Console Read Only Access
+      pIsWellArchitectedConsoleFullAccess:
+        default: Well Architected Console Full Access
+      pIsSecurityAudit:
+        default: Security Audit
+      pIsAWSBillingReadOnlyAccess:
+        default: AWS Billing Read Only Access
+
+
 Parameters:
 
-  AccountId:
+  pAccountId:
     Type: String
-    Description: Effectual's AWS Account ID provided. Contact your Effectual representative if needing the Account ID.
+    Description: "Effectual's AWS Account ID provided. Contact your Effectual representative if needing the Account ID."
+
+  pIsFullAdmin:
+    Type: String
+    Description: "Allow full admin access of the AWS Account."
+    Default: "no"
+    AllowedValues:
+      - "no"
+      - "yes"
+
+  pIsWellArchitectedConsoleReadOnlyAccess:
+    Type: String
+    Description: "Allow Well-Architected console read-only access into the AWS Account."
+    Default: "no"
+    AllowedValues:
+      - "no"
+      - "yes"
+
+  pIsWellArchitectedConsoleFullAccess:
+    Type: String
+    Description: "Allow Well-Architected console full access into the AWS Account."
+    Default: "no"
+    AllowedValues:
+      - "no"
+      - "yes"
+
+  pIsReadOnlyAccess:
+    Type: String
+    Description: "Allow Read Only access to the AWS console for the AWS Account."
+    Default: "yes"
+    AllowedValues:
+      - "no"
+      - "yes"
+
+  pIsSecurityAudit:
+    Type: String
+    Description: "Allow Security Audit access to the AWS console for the AWS Account."
+    Default: "no"
+    AllowedValues:
+      - "no"
+      - "yes"
+
+  pIsAWSBillingReadOnlyAccess:
+    Type: String
+    Description: "Allow AWS Billing read-only access to the AWS console for the AWS Account."
+    Default: "no"
+    AllowedValues:
+      - "no"
+      - "yes"
+
+Conditions:
+
+  cIsFullAdmin: !Equals ["yes", !Ref pIsFullAdmin]
+  cIsReadOnlyAccess: !Equals ["yes", !Ref pIsReadOnlyAccess]
+  cIsSecurityAudit: !Equals ["yes", !Ref pIsSecurityAudit]
+  cIsWellArchitectedConsoleReadOnlyAccess: !Equals ["yes", !Ref pIsWellArchitectedConsoleReadOnlyAccess]
+  cIsWellArchitectedConsoleFullAccess: !Equals ["yes", !Ref pIsWellArchitectedConsoleFullAccess]
+  cIsAWSBillingReadOnlyAccess: !Equals ["yes", !Ref pIsAWSBillingReadOnlyAccess]
 
 Resources:
 
@@ -19,9 +113,13 @@ Resources:
         Statement:
         - Effect: Allow
           Principal:
-            "AWS": !Sub arn:aws:iam::${AccountId}:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_Effectual-Auditor_46d5c3152e4e8310
+            "AWS": !Sub arn:aws:iam::${pAccountId}:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_Effectual-Auditor_46d5c3152e4e8310
           Action:
           - sts:AssumeRole
       ManagedPolicyArns:
-      - !Sub arn:${AWS::Partition}:iam::aws:policy/AdministratorAccess
-
+      - !If [cIsFullAdmin, !Sub "arn:${AWS::Partition}:iam::aws:policy/AdministratorAccess", !Ref "AWS::NoValue"]
+      - !If [cIsReadOnlyAccess, !Sub "arn:${AWS::Partition}:iam::aws:policy/ReadOnlyAccess", !Ref "AWS::NoValue"]
+      - !If [cIsSecurityAudit, !Sub "arn:${AWS::Partition}:iam::aws:policy/SecurityAudit", !Ref "AWS::NoValue"]
+      - !If [cIsWellArchitectedConsoleReadOnlyAccess, !Sub "arn:${AWS::Partition}:iam::aws:policy/WellArchitectedConsoleReadOnlyAccess", !Ref "AWS::NoValue"]
+      - !If [cIsWellArchitectedConsoleFullAccess, !Sub "arn:${AWS::Partition}:iam::aws:policy/WellArchitectedConsoleFullAccess", !Ref "AWS::NoValue"]
+      - !If [cIsAWSBillingReadOnlyAccess, !Sub "arn:${AWS::Partition}:iam::aws:policy/AWSBillingReadOnlyAccess", !Ref "AWS::NoValue"]
